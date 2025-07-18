@@ -1,0 +1,101 @@
+# Ignore compiled output and temp files
+**/bin/
+**/obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+*.tmp
+*.user
+*.suo
+*.csproj.user
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.bak
+*.log
+*.tmp
+
+# General
+*.log
+*.tmp
+*.cache
+*.pid
+*.seed
+*.env
+.env.*
+*.local
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# C / C++
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.out
+*.a
+
+# Logs and databases
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.log
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Other binary artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+*.apk
+*.jar
+*.class
+
+# Misc
+dist/
+build/
+coverage/
+*.tgz
+*.lock
+*.bak
+*.orig
+*.rej
+
+# Git
+*.orig
+*.rej
+*.patch
+*.diff
+*.goutputstream*
+*.swp
+*.swo
+*.swn
+
+# Secrets (be cautious)
+*.key
+*.pem
+*.crt
+*.p12
+*.jks
+secrets.*
