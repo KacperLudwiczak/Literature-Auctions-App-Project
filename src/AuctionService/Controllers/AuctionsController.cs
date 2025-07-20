@@ -81,6 +81,8 @@ public class AuctionsController(AuctionDbContext context, IMapper mapper, IPubli
         auction.Item.Name = auctionDto.Name ?? auction.Item.Name;
         auction.Item.Genre = auctionDto.Genre ?? auction.Item.Genre;
         auction.Item.Year = auctionDto.Year;
+        
+        await publishEndpoint.Publish(mapper.Map<AuctionUpdated>(auction));
 
         var result = await context.SaveChangesAsync() > 0;
 
@@ -103,11 +105,16 @@ public class AuctionsController(AuctionDbContext context, IMapper mapper, IPubli
 
          // TODO: check seller is the same as current user
         context.Auctions.Remove(auction);
+
+        await publishEndpoint.Publish<AuctionDeleted>(new {Id = auction.Id.ToString()});
+
         var result = await context.SaveChangesAsync() > 0;
+
         if (!result)
         {
             return BadRequest("Failed to delete auction");
         }
+        
         return Ok();
     } 
 }
