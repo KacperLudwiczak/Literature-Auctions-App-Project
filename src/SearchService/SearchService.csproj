@@ -15,4 +15,8 @@
     <PackageReference Include="MongoDB.Entities" Version="24.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
