@@ -76,6 +76,20 @@ services:
         condition: service_started
       mongodb:
         condition: service_healthy
+  identity-svc:
+    image: kacperludwiczak/identity-svc:latest
+    build: 
+      context: .
+      dockerfile: src/IdentityService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Username=postgres;Password=postgrespw;Database=identity
+    ports:
+      - "5001:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
 volumes:
   pgdata:
   mongodata:
