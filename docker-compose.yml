@@ -7,6 +7,11 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
   mongodb:
     image: mongo:latest
     environment:
@@ -16,11 +21,43 @@ services:
       - "27017:27017"
     volumes:
       - mongodata:/data/db
+    healthcheck:
+        test:
+          [
+            "CMD",
+            "mongosh",
+            "--quiet",
+            "127.0.0.1/test",
+            "--eval",
+            "'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)'",
+          ]
+        interval: 10s
+        timeout: 10s
+        retries: 5
+        start_period: 40s
   rabbitmq:
     image: rabbitmq:4-management-alpine
     ports:
       - "15672:15672"
       - "5672:5672"
+  auction-svc:
+    image: kacperludwiczak/auction-svc:latest
+    build: 
+      context: .
+      dockerfile: src/AuctionService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - RabbitMQ__Host=rabbitmq
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Username=postgres;Password=postgrespw;Database=auctions
+      - IdentityServiceUrl=http://identity-svc
+    ports:
+      - "7001:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
 volumes:
   pgdata:
   mongodata:
