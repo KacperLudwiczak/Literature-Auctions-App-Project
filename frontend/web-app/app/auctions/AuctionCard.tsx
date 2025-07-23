@@ -17,7 +17,7 @@ export default function AuctionCard({ auction }: Props) {
             </div>
             <div className="flex flex-col">
                 <h3 className="font-semibold text-lg mt-1 ml-2">{auction.name}</h3>
-                <p className="text-amber-900 text-base mt-1 ml-2">{auction.year}</p>
+                <p className="text-amber-900 font-semibold text-base mt-1 ml-2">{auction.year}</p>
             </div>
         </a>
     )
