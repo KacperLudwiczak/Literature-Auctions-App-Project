@@ -5,6 +5,7 @@ import { BsStopwatchFill } from "react-icons/bs";
 import { GiFlamer } from "react-icons/gi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaRegCircleStop } from "react-icons/fa6";
+import { buttonClass } from "@/lib/styles";
 
 const pageSizeButtons = [4, 8, 12];
 const orderButtons = [
@@ -17,9 +18,6 @@ const filterButtons = [
     { label: 'Ending < 6 hours', icon: FaRegCalendarAlt, value: 'endingSoon' },
     { label: 'Completed', icon: BsStopwatchFill, value: 'finished' },
 ]
-export const buttonClass =
-    "bg-white text-amber-900 border border-amber-900 hover:bg-amber-900 hover:text-white hover:border-amber-900 focus:bg-amber-900 focus:text-white focus:border-amber-900 focus:ring-0 transition-all";
-
 
 export default function Filters() {
     const setParams = useParamsStore(state => state.setParams);
