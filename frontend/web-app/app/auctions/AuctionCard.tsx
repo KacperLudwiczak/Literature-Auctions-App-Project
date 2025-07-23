@@ -12,12 +12,12 @@ export default function AuctionCard({ auction }: Props) {
             <div className="relative w-full bg-gray-200 aspect-[16/10] rounded-lg overflow-hidden">
                 <CarImage imageUrl={auction.imageUrl} />
                 <div className="absolute bottom-2 left-2">
-                    <CountdownTimer/>
+                    <CountdownTimer auctionEnd={auction.auctionEnd}/>
                 </div>
             </div>
-            <div className="flex justify-between items-center mt-4">
-                <h3 className="text-gray-700">{auction.name}</h3>
-                <p className="font-semibold text-sm">{auction.year}</p>
+            <div className="flex flex-col">
+                <h3 className="font-semibold text-lg mt-1 ml-2">{auction.name}</h3>
+                <p className="text-amber-900 text-base mt-1 ml-2">{auction.year}</p>
             </div>
         </a>
     )
