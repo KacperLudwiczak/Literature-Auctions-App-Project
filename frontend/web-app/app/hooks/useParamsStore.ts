@@ -19,7 +19,7 @@ const initialState: State = {
     pageSize: 12,
     pageCount: 1,
     searchTerm: '',
-    orderBy: 'make',
+    orderBy: 'name',
     filterBy: 'live'
 }
 

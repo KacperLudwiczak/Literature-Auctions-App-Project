@@ -1,21 +1,24 @@
 import { useParamsStore } from "@/app/hooks/useParamsStore";
 import { Button, ButtonGroup } from "flowbite-react";
 import { AiOutlineClockCircle, AiOutlineSortAscending } from "react-icons/ai";
-import { BsFillStopCircleFill, BsStopwatchFill } from "react-icons/bs";
-import { GiFinishLine, GiFlame } from "react-icons/gi";
+import { BsStopwatchFill } from "react-icons/bs";
+import { GiFlamer } from "react-icons/gi";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { FaRegCircleStop } from "react-icons/fa6";
 
 const pageSizeButtons = [4, 8, 12];
 const orderButtons = [
     { label: 'Alphabetical', icon: AiOutlineSortAscending, value: 'make' },
     { label: 'End date', icon: AiOutlineClockCircle, value: 'endingSoon' },
-    { label: 'Recently added', icon: BsFillStopCircleFill, value: 'new' },
+    { label: 'Recently added', icon: FaRegCircleStop, value: 'new' },
 ]
-
 const filterButtons = [
-    { label: 'Live auctions', icon: GiFlame, value: 'live' },
-    { label: 'Ending < 6 hours', icon: GiFinishLine, value: 'endingSoon' },
+    { label: 'Live auctions', icon: GiFlamer, value: 'live' },
+    { label: 'Ending < 6 hours', icon: FaRegCalendarAlt, value: 'endingSoon' },
     { label: 'Completed', icon: BsStopwatchFill, value: 'finished' },
 ]
+export const buttonClass =
+    "bg-white text-amber-900 border border-amber-900 hover:bg-amber-900 hover:text-white hover:border-amber-900 focus:bg-amber-900 focus:text-white focus:border-amber-900 focus:ring-0 transition-all";
 
 
 export default function Filters() {
@@ -30,8 +33,7 @@ export default function Filters() {
                         <Button
                             key={value}
                             onClick={() => setParams({ filterBy: value })}
-                            color="gray"
-                            className="focus:ring-0"
+                            className={buttonClass}
                         >
                             <Icon className="mr-3 h-4 w-4" />
                             {label}
@@ -47,8 +49,7 @@ export default function Filters() {
                         <Button
                             key={value}
                             onClick={() => setParams({ orderBy: value })}
-                            color="gray"
-                            className="focus:ring-0"
+                            className={buttonClass}
                         >
                             <Icon className="mr-3 h-4 w-4" />
                             {label}
@@ -64,8 +65,7 @@ export default function Filters() {
                         <Button
                             key={index}
                             onClick={() => setParams({ pageSize: value })}
-                            color="gray"
-                            className="focus:ring-0"
+                            className={buttonClass}
                         >
                             {value}
                         </Button>
