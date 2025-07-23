@@ -19,10 +19,7 @@ const filterButtons = [
 
 
 export default function Filters() {
-    const pageSize = useParamsStore(state => state.pageSize);
     const setParams = useParamsStore(state => state.setParams);
-    const orderBy = useParamsStore(state => state.orderBy);
-    const filterBy = useParamsStore(state => state.filterBy);
 
     return (
         <div className="flex justify-between items-center mb-4">
@@ -33,7 +30,7 @@ export default function Filters() {
                         <Button
                             key={value}
                             onClick={() => setParams({ filterBy: value })}
-                            color={`${filterBy === value ? 'red' : 'gray'}`}
+                            color="gray"
                             className="focus:ring-0"
                         >
                             <Icon className="mr-3 h-4 w-4" />
@@ -50,7 +47,7 @@ export default function Filters() {
                         <Button
                             key={value}
                             onClick={() => setParams({ orderBy: value })}
-                            color={`${orderBy === value ? 'red' : 'gray'}`}
+                            color="gray"
                             className="focus:ring-0"
                         >
                             <Icon className="mr-3 h-4 w-4" />
@@ -67,7 +64,7 @@ export default function Filters() {
                         <Button
                             key={index}
                             onClick={() => setParams({ pageSize: value })}
-                            color={`${pageSize === value ? 'red' : 'gray'}`}
+                            color="gray"
                             className="focus:ring-0"
                         >
                             {value}

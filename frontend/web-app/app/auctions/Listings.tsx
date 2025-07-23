@@ -12,8 +12,7 @@ import Filters from "@/app/auctions/Filters";
 import EmptyFilter from "@/app/components/EmptyFilter";
 
 export default function Listings() {
-    const [data, setData] = useState<PagedResult<Auction>>();
-    const setParams = useParamsStore(state => state.setParams);
+    const [data, setData] = useState<PagedResult<Auction>>();    
     const params = useParamsStore(useShallow(state => ({
         pageNumber: state.pageNumber,
         pageSize: state.pageSize,
@@ -21,6 +20,7 @@ export default function Listings() {
         orderBy: state.orderBy,
         filterBy: state.filterBy
     })));
+    const setParams = useParamsStore(state => state.setParams);
     const url = qs.stringifyUrl({ url: '', query: params }, { skipEmptyString: true })
 
     function setPageNumber(pageNumber: number) {

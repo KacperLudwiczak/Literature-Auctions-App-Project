@@ -16,7 +16,7 @@ export default function AppPagination({ currentPage, pageCount, pageChanged }: P
             totalPages={pageCount}
             layout="pagination"
             showIcons={true}
-            className="text-blue-500 mb-5"
+            color="gray"
         />
     )
 }
