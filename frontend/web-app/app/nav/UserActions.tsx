@@ -6,7 +6,9 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { HiLogout, HiCog } from "react-icons/hi";
 import { FaTrophy } from "react-icons/fa";
-import { FaCircleUser, FaBook  } from "react-icons/fa6";
+import { FaBook  } from "react-icons/fa6";
+import { MdMonetizationOn } from "react-icons/md";
+import UserDropdownLabel from "@/app/nav/UserDropdownLabel";
 
 type Props = {
     user: User
@@ -15,18 +17,18 @@ type Props = {
 export default function UserActions({ user }: Props) {
 
     return (
-        <Dropdown inline label={`Welcome ${user.username}`} className="cursor-pointer">
+        <Dropdown inline label={<UserDropdownLabel username={user.username}/>} className="cursor-pointer" arrowIcon={false}>
         <DropdownHeader>
             <span className="block text-sm">{user.name ?? ""}</span>
         </DropdownHeader>
         <DropdownDivider />
-        <DropdownItem icon={FaCircleUser}>
+        <DropdownItem icon={FaBook}>
             My Auctions
         </DropdownItem>
         <DropdownItem icon={FaTrophy}>
             Auctions won
         </DropdownItem>
-        <DropdownItem icon={FaBook}>
+        <DropdownItem icon={MdMonetizationOn}>
             Sell my items
         </DropdownItem>
         <DropdownItem icon={HiCog}>
