@@ -18,8 +18,8 @@ export default function UserActions({ user }: Props) {
         <Dropdown inline label={`Welcome ${user.username}`} className="cursor-pointer">
         <DropdownHeader>
             <span className="block text-sm">{user.name ?? ""}</span>
-            <span className="block truncate text-sm font-medium">{user.email ?? ""}</span>
         </DropdownHeader>
+        <DropdownDivider />
         <DropdownItem icon={FaCircleUser}>
             My Auctions
         </DropdownItem>

@@ -3,6 +3,7 @@
 import { Button, Spinner } from "flowbite-react";
 import { useState } from "react";
 import { updateAuctionTest } from "../actions/auctionActions";
+import { buttonClass } from "@/lib/styles";
 
 export default function AuthTest() {
     const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ export default function AuthTest() {
 
     return (
         <div className="flex items-center gap-4">
-            <Button outline onClick={handleUpdate}>
+            <Button outline onClick={handleUpdate} className={buttonClass}>
                 {loading && <Spinner size="sm" className="me-3" light />}
                 Test auth
             </Button>
