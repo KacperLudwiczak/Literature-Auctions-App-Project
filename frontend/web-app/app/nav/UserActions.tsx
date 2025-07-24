@@ -1,11 +1,12 @@
 'use client'
 
-import { Dropdown, DropdownDivider, DropdownItem } from "flowbite-react";
+import { Dropdown, DropdownDivider, DropdownItem, DropdownHeader } from "flowbite-react";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { AiFillCar, AiFillTrophy, AiOutlineLogout } from "react-icons/ai";
-import { HiCog, HiUser } from "react-icons/hi2";
+import { HiLogout, HiCog } from "react-icons/hi";
+import { FaTrophy } from "react-icons/fa";
+import { FaCircleUser, FaBook  } from "react-icons/fa6";
 
 type Props = {
     user: User
@@ -14,23 +15,27 @@ type Props = {
 export default function UserActions({ user }: Props) {
 
     return (
-        <Dropdown inline label={`Welcome ${user.name}`} className="cursor-pointer">
-        <DropdownItem icon={HiUser}>
+        <Dropdown inline label={`Welcome ${user.username}`} className="cursor-pointer">
+        <DropdownHeader>
+            <span className="block text-sm">{user.name ?? ""}</span>
+            <span className="block truncate text-sm font-medium">{user.email ?? ""}</span>
+        </DropdownHeader>
+        <DropdownItem icon={FaCircleUser}>
             My Auctions
         </DropdownItem>
-        <DropdownItem icon={AiFillTrophy}>
+        <DropdownItem icon={FaTrophy}>
             Auctions won
         </DropdownItem>
-        <DropdownItem icon={AiFillCar}>
-            Sell my car
+        <DropdownItem icon={FaBook}>
+            Sell my items
         </DropdownItem>
         <DropdownItem icon={HiCog}>
             <Link href='/session'>
-            Session (dev only!)
+            Session (Dev only)
             </Link>
         </DropdownItem>
         <DropdownDivider />
-        <DropdownItem icon={AiOutlineLogout} onClick={() => signOut({redirectTo: '/'})}>
+        <DropdownItem icon={HiLogout} onClick={() => signOut({redirectTo: '/'})}>
             Sign out
         </DropdownItem>
         </Dropdown>
