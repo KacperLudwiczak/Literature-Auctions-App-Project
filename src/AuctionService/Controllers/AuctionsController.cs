@@ -94,7 +94,7 @@ public class AuctionsController(AuctionDbContext context, IMapper mapper, IPubli
             return BadRequest("Failed to update auction");
         }
 
-        return Ok(mapper.Map<AuctionDto>(auction));
+        return Ok();
     }
 
     [Authorize]
