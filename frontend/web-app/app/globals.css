@@ -26,3 +26,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
