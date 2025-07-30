@@ -39,8 +39,8 @@ export default function DetailedSpecs({auction}: Props) {
                         Has reserve price?
                     </TableCell>
                     <TableCell>
-                        {typeof auction.reservePrice === 'number' && auction.reservePrice > 0 ? 'Yes' : 'No'}
-                    </TableCell>
+                        {auction.reservePrice > 0 ? 'Yes' : 'No'}
+                    </TableCell>                  
                 </TableRow>
             </TableBody>
         </Table>
