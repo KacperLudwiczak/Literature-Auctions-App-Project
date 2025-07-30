@@ -16,7 +16,7 @@ export default async function Details({ params }: { params: Promise<{ id: string
         <>
             <div className="flex justify-between">
                 <div className="flex items-center gap-3">
-                    <Heading title={`${data.name}`} />
+                    <Heading title={`${data.name}`}/>
                     {user?.username === data.seller && (
                         <>
                             <EditButton id={data.id} />
@@ -27,7 +27,7 @@ export default async function Details({ params }: { params: Promise<{ id: string
                 </div>
 
                 <div className="flex gap-3">
-                    <h3 className="text-2xl font-semibold">Time remaining:</h3>
+                    <h3 className="text-2xl font-semibold text-gray-600">Time remaining:</h3>
                     <CountdownTimer auctionEnd={data.auctionEnd} />
                 </div>
             </div>
@@ -37,7 +37,7 @@ export default async function Details({ params }: { params: Promise<{ id: string
                     rounded-lg overflow-hidden">
                     <CarImage imageUrl={data.imageUrl} />
                 </div>
-                <div className="border-2 rounded-lg p-2 bg-gray-200">
+                <div className="border-2 rounded-lg p-2 bg-white border-gray-300">
                     <Heading title="Bids" />
                 </div>
             </div>

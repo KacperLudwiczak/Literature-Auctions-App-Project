@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { Auction } from "@/types";
 import DateInput from "@/app/components/DateInput";
 import Input from "@/app/components/Input";
+import { buttonClass } from "@/lib/styles";
 
 type Props = {
     auction?: Auction;
@@ -81,18 +82,16 @@ export default function AuctionForm({ auction }: Props) {
                 </div>
             </>}
 
-
-            <div className="flex justify-between">
-                <Button color='alternative' onClick={() => router.push('/')}>Cancel</Button>
+            <div className="flex space-x-2">
                 <Button
-                    outline
-                    color='green'
+                    className={buttonClass}
                     type="submit"
                     disabled={!isValid || !isDirty}
                 >
-                    {isSubmitting && <Spinner size="sm" />}
+                    {isSubmitting && <Spinner size="sm" className="mr-2"/>}
                     Submit
                 </Button>
+                <Button outline color='red' onClick={() => router.push('/')}>Cancel</Button>                
             </div>
         </form>
     )
