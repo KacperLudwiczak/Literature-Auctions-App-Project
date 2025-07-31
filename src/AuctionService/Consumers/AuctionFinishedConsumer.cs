@@ -9,7 +9,7 @@ public class AuctionFinishedConsumer(AuctionDbContext dbContext) : IConsumer<Auc
 {
     public async Task Consume(ConsumeContext<AuctionFinished> context)
     {
-        var auction = await dbContext.Auctions.FindAsync(context.Message.AuctionId) 
+        var auction = await dbContext.Auctions.FindAsync(Guid.Parse(context.Message.AuctionId))
             ?? throw new InvalidOperationException($"Auction with ID {context.Message.AuctionId} not found.");
         
         if (context.Message.ItemSold)

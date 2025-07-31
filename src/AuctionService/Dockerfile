@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 EXPOSE 80
+EXPOSE 7777
 
 # Copy csproj and restore as distinct layers
 COPY LiteratureAuctions.sln LiteratureAuctions.sln
