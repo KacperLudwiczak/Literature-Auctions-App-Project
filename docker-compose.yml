@@ -124,6 +124,20 @@ services:
         condition: service_started
       mongodb:
         condition: service_healthy
+  notify-svc:
+    image: kacperludwiczak/notify-svc:latest
+    build: 
+      context: .
+      dockerfile: src/NotificationService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - RabbitMQ__Host=rabbitmq
+    ports:
+      - "7004:80"
+    depends_on:
+      rabbitmq:
+        condition: service_started
 volumes:
   pgdata:
   mongodata:
