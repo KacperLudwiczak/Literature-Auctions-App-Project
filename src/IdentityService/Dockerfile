@@ -3,7 +3,7 @@ WORKDIR /src
 EXPOSE 80
 
 # Copy csproj and restore as distinct layers
-COPY LiteratureAuctions.sln LiteratureAuctions.sln
+# COPY LiteratureAuctions.sln ./
 COPY src/IdentityService/IdentityService.csproj src/IdentityService/IdentityService.csproj
 
 # Restore package deps

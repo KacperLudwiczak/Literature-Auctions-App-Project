@@ -3,7 +3,7 @@ WORKDIR /src
 EXPOSE 80
 
 # Copy csproj and restore as distinct layers
-COPY LiteratureAuctions.sln LiteratureAuctions.sln
+# COPY LiteratureAuctions.sln ./
 COPY src/SearchService/SearchService.csproj src/SearchService/SearchService.csproj
 COPY src/Contracts/Contracts.csproj src/Contracts/Contracts.csproj
 

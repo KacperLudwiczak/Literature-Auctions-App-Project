@@ -4,7 +4,7 @@ EXPOSE 80
 EXPOSE 7777
 
 # Copy csproj and restore as distinct layers
-COPY LiteratureAuctions.sln LiteratureAuctions.sln
+# COPY LiteratureAuctions.sln ./
 COPY src/AuctionService/AuctionService.csproj src/AuctionService/AuctionService.csproj
 COPY src/Contracts/Contracts.csproj src/Contracts/Contracts.csproj
 
