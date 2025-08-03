@@ -4,15 +4,15 @@ import AuctionCard from "@/app/auctions/AuctionCard";
 import AppPagination from "@/app/components/AppPagination";
 import { useParamsStore } from "@/app/hooks/useParamsStore";
 import { useShallow } from "zustand/shallow";
-import { Auction, PagedResult } from "@/types";
 import { useEffect, useState } from "react";
 import qs from "query-string";
 import { getData } from "@/app/actions/auctionActions";
 import Filters from "@/app/auctions/Filters";
 import EmptyFilter from "@/app/components/EmptyFilter";
+import { useAuctionStore } from "@/hooks/useAuctionStore";
 
 export default function Listings() {
-    const [data, setData] = useState<PagedResult<Auction>>();    
+    const [loading, setLoading] = useState(true);
     const params = useParamsStore(useShallow(state => ({
         pageNumber: state.pageNumber,
         pageSize: state.pageSize,
@@ -22,6 +22,12 @@ export default function Listings() {
         seller: state.seller,
         winner: state.winner
     })));
+    const data = useAuctionStore(useShallow(state => ({
+        auctions: state.auctions,
+        totalCount: state.totalCount,
+        pageCount: state.pageCount
+    })))
+    const setData = useAuctionStore(state => state.setData);
     const setParams = useParamsStore(state => state.setParams);
     const url = qs.stringifyUrl({ url: '', query: params }, { skipEmptyString: true })
 
@@ -31,11 +37,12 @@ export default function Listings() {
 
     useEffect(() => {
         getData(url).then(data => {
-            setData(data)
+            setData(data);
+            setLoading(false);
         })
-    }, [url]);
+    }, [url, setData]);
 
-    if (!data) return <h3>Loading...</h3>
+    if (loading) return <h3>Loading...</h3>
 
     return (
         <>
@@ -45,7 +52,7 @@ export default function Listings() {
             ) : (
                 <>
                     <div className="grid grid-cols-4 gap-6">
-                        {data && data.results.map(auction => (
+                        {data && data.auctions.map(auction => (
                             <AuctionCard key={auction.id} auction={auction} />
                         ))}
                     </div>
