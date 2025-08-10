@@ -2,12 +2,10 @@ using AuctionService.Data;
 using AuctionService.DTOs;
 using AuctionService.Entities;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Contracts;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AuctionService.Controllers;
 
@@ -72,7 +70,7 @@ public class AuctionsController(IAuctionRepository repository, IMapper mapper, I
         auction.Item.Name = auctionDto.Name ?? auction.Item.Name;
         auction.Item.Genre = auctionDto.Genre ?? auction.Item.Genre;
         auction.Item.Year = auctionDto.Year;
-        
+
         await publishEndpoint.Publish(mapper.Map<AuctionUpdated>(auction));
 
         var result = await repository.SaveChangesAsync();
@@ -87,7 +85,7 @@ public class AuctionsController(IAuctionRepository repository, IMapper mapper, I
 
     [Authorize]
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteAuction(Guid id) 
+    public async Task<ActionResult> DeleteAuction(Guid id)
     {
         var auction = await repository.GetAuctionEntityById(id);
         if (auction == null)
@@ -98,7 +96,7 @@ public class AuctionsController(IAuctionRepository repository, IMapper mapper, I
         if (auction.Seller != User.Identity?.Name) return Forbid();
         repository.RemoveAuction(auction);
 
-        await publishEndpoint.Publish<AuctionDeleted>(new {Id = auction.Id.ToString()});
+        await publishEndpoint.Publish<AuctionDeleted>(new { Id = auction.Id.ToString() });
 
         var result = await repository.SaveChangesAsync();
 
@@ -106,7 +104,7 @@ public class AuctionsController(IAuctionRepository repository, IMapper mapper, I
         {
             return BadRequest("Failed to delete auction");
         }
-        
+
         return Ok();
     } 
 }
