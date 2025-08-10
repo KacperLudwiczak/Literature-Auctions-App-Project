@@ -8,9 +8,16 @@ namespace AuctionService.Data;
 
 public class AuctionRepository(AuctionDbContext context, IMapper mapper) : IAuctionRepository
 {
-    public void AddAuction(Auction auction)
+    public async Task<List<AuctionDto>> GetAuctionsAsync(string date)
     {
-        context.Auctions.Add(auction);
+        var query = context.Auctions.OrderBy(x => x.Item.Name).AsQueryable();
+
+        if (!string.IsNullOrEmpty(date))
+        {
+            query = query.Where(x => x.UpdatedAt.CompareTo(DateTime.Parse(date).ToUniversalTime()) > 0);
+        }
+
+        return await query.ProjectTo<AuctionDto>(mapper.ConfigurationProvider).ToListAsync();
     }
 
     public async Task<AuctionDto> GetAuctionByIdAsync(Guid id)
@@ -27,16 +34,9 @@ public class AuctionRepository(AuctionDbContext context, IMapper mapper) : IAuct
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<AuctionDto>> GetAuctionsAsync(string date)
+    public void AddAuction(Auction auction)
     {
-        var query = context.Auctions.OrderBy(x => x.Item.Name).AsQueryable();
-
-        if (!string.IsNullOrEmpty(date))
-        {
-            query = query.Where(x => x.UpdatedAt.CompareTo(DateTime.Parse(date).ToUniversalTime()) > 0);
-        }
-
-        return await query.ProjectTo<AuctionDto>(mapper.ConfigurationProvider).ToListAsync();
+        context.Auctions.Add(auction);
     }
 
     public void RemoveAuction(Auction auction)
