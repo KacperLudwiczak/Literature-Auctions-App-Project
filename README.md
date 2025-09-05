@@ -1,5 +1,7 @@
 # Literature Auctions 📜
 
+![screenshot](frontend/web-app/public/literature_auctions.png)
+
 ## Project Description
 
 **Literature Auctions** is a microservices-based web application designed to enable **real-time online auctions for literature and books**. The system empowers users to **search, bid, and receive notifications** about rare books, manuscripts, and other literary works. Built using a combination of modern technologies like **ASP.NET Core**, **Next.js**, and **RabbitMQ**, the app delivers a scalable, event-driven experience for both buyers and sellers.
